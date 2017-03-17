@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <ul> 
+  {%for libros in libros%}
+    <tr>
+                  <th>{{libros.id}}</th>
+                  <th>{{libros.nombre}}</th>
+                  <th>{{libros.autor}}</th>
+                  <th>{{libros.editorial}}</th>
+                  <th>{{libros.ISBN}}</th>
+                  <th>{{libros.precio}}</th>
+                </tr>
+  {%empty%}
+    <li>No hay libros en existencia!</li>
+  {%endfor%}
+</ul>
+    
+{%endblock%}
