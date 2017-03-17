@@ -1,13 +1,7 @@
 {% extends "base.html" %}
 
 {%block content%}
-  <h1>Agragar Libro</h1>
-  <form class="" action="" method="POST">{% csrf_token %}
-    <label for="">Nuevo Libro</label>
-    {{form.as_p}}
-    <input type="submit" name="" value="crear">
 
-  </form>
+    {%include "form.html" with form=form submit_btn="Crear Libro" titulo=titulo%}
+
 {%endblock%}
-
-

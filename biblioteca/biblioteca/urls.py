@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^detalle/(?P<object_id>\d+)/$', views.detalle_libro, name='detalle'),
     url(r'^detalle/(?P<slug>[\w-]+)/$', views.detalle_s, name='detalle_s'),
     url(r'^detalle/(?P<slug>[\w-]+)/$', views.detalle_slug, name='detalle_slug'),
+    url(r'^detalle/(?P<object_id>\d+)/editar/$', views.actualizar, name='actualizar'),
     url(r'^crear_libro/$', views.agregar_libro, name='nuevo_libro'),
 ]
 

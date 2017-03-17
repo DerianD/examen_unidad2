@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 
 from .models import libromodelo
-from .forms import libroAddForms
+from .forms import libroAddForms, LibroModelForm
 
 # Create your views here.
 
@@ -55,7 +55,11 @@ def detalle_slug(request, slug=None):
     return render(request, template, contexto)
 
 def agregar_libro(request, object_id=None):
-    form = libroAddForms(request.POST or None)
+    form = LibroModelForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        print "Alta exitosa!"
+    """
     if request.method == "POST":
         print request.POST
     if form.is_valid():
@@ -76,11 +80,27 @@ def agregar_libro(request, object_id=None):
         nuevo_libro.ISBN = ISBN
         nuevo_libro.precio = precio
         nuevo_libro.save()
-
+    """
     template = "agregar_libro.html"
     context = {
+        "titulo":"Crear Producto!",
         "form":form
     }
 
     return render(request, template, context)
 
+
+def actualizar(request, object_id=None):
+    #Logico de negocio alias hechizo
+    libros = get_object_or_404(libromodelo, id=object_id)
+    form = LibroModelForm(request.POST or None, instance=libros)
+    if form.is_valid():
+        form.save()
+        print "Actualizacion exitosa!"
+    template = "actualizar.html"
+    contexto= {
+           "libros": libros,
+           "form":form,
+           "titulo":"Actualizar Libro"
+           }
+    return render(request, template, contexto)
